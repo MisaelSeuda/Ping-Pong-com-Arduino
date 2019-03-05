@@ -1,34 +1,87 @@
 #include "LedControl.h"
 
 //LedControl variable = LedControl(int dataPin, int clkPin, int csPin, int numDevices);
-LedControl lc = LedControl(2, 4, 3, 1);
+LedControl lc = LedControl(2, 3, 4, 1);
 
-void setup(){
-  lc.shutdown(0, false);
+//Variáveis global
+int button1 = 8, button2 = 7; //Portas de botão 1 e botão 2
+
+void setup()
+{
+  Serial.begin(9600); //Não sei bem o que é
+
+  lc.shutdown(0, false); //habilita o display
   lc.setIntensity(0, 8); //maximum = 15
-  lc.clearDisplay(0); 
+
+  pinMode(button1, INPUT);  //Setup inicial da leitura dos botões
+  pinMode(button2, INPUT);  //Setup inicial da leitura dos botões
+
+  randomSeed(analogRead(0));//Setup inicial pra utilizar o random
 }
 
-void loop(){
-  int directionX = 0;
-  int directionY = random(8);
-  int i=0, i2=directionY, count = 0;
-      
-  while(i < 8)
-    {  
-      lc.setLed(0, i, i2, HIGH);
-      delay(300);
-      lc.setLed(0, i, i2, LOW); 
-        
-      if(i2 == 7)
-        {
-          i2--;
-          count++;
-        }
-      else if(count != 0)
-        i2--; 
-      else
-        i2++;
-        i++;
-    }    
+void loop()
+{
+  int directionX;
+  int directionY;
+  float speedball = 300;  //Velocidade inicial da bolinha
+  int platform = 3; //Posição inicial da plataforma
+
+  int row = 0, column = random(8);  //Linha sempre começa pelo 0 e a coluna e aleátorio de 0 a 7
+
+  while (row != 7)
+  {
+    if (random(0, 2) == 0 && row == 0) //Se random for 0, bolinha começa pela direita
+    {
+      directionX = 1;
+      directionY = 1;
+    }
+    else if(random(0, 2) == 1 && row == 0)   //Se random for 1, bolinha começa pela esquerda
+    {
+      directionX = -1;
+      directionY = -1;
+    }
+    
+    if (digitalRead(button1) && platform + 1 < 7) //vai pra direita quando botão1 foi clicado e não deixa ultrapassa a margem
+    {
+      platform++;
+    }
+    if (digitalRead(button2) && platform > 0) //vai pra esquerda quando botão2 foi clicado e não deixa ultrapassa a margem
+    {
+      platform--;
+    }
+
+    lc.clearDisplay(0);
+    lc.setLed(0, 7, platform, HIGH);  //Acende a plataforma
+    lc.setLed(0, 7, platform + 1, HIGH);  //Acende a plataforma
+    lc.setLed(0, row, column, true);  //Acende a bolinha
+    delay(speedball); //controla a velocidade da bolinha e da plataforma
+
+    if (row == 0)directionX = 1;  //Faz descer a bolinha quando linha for 0
+    if (row == 6 && (platform == column || platform - 1 == column || platform + 1 == column || platform + 2 == column))directionX = -1; //Faz subir a bolinha quando linha for 6 e o player conseguir atingir a bolinha
+    if (row == 6 && platform - 1 == column)directionY = -1; //Se pegar na borda esquerda da plataforma a bolinha vai pra esquerda
+    if (row == 6 && platform + 2 == column)directionY = +1; //Se pegar na borda esquerda da plataforma a bolinha vai pra direita
+    if (column == 0)directionY = 1; //A bolinha vai pra direita se caso pegar na coluna 0
+    if (column == 7)directionY = -1;  //A bolinha vai pra esquerda se caso pegar na coluna 7
+
+    row += directionX;  //As condições de row são aplicadas
+    column += directionY; //As condições de column são aplicadas
+
+    speedball -= 0.5; //Cada ciclo a velocidade da plataforma e a bolinha aumentam
+  }
+
+  //Pequena animação pra saber onde a bolinha morreu
+
+  lc.clearDisplay(0);
+
+  for (int i = 0; i < 2; i++)
+  {
+    lc.setLed(0, 7, platform, HIGH);
+    lc.setLed(0, 7, platform + 1, HIGH);
+    lc.setLed(0, row, column, HIGH);
+    delay(500);
+    lc.setLed(0, 7, platform, LOW);
+    lc.setLed(0, 7, platform + 1, LOW);
+    lc.setLed(0, row, column, LOW);
+    delay(500);
+  }
 }
