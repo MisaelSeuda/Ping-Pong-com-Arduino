@@ -37,7 +37,7 @@
     https://www.youtube.com/watch?v=sv9dDtYnE1g
 
     
- * Estude o código bastante haha>. Para zerar o jogo, jogador deve fazer uma pontuação específica, irá mostrar uma cara de um emoji  :smile: .
+ * Estude o código bastante haha. Para zerar o jogo, jogador deve fazer uma pontuação específica, vai mostrar uma cara de um emoji  :smile: .
  
   * :memo:**Licence**:
   
