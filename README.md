@@ -28,9 +28,9 @@
 
     https://www.arduino.cc/en/main/software
 
-* Copie o código :facepunch: :
+* Código se encontra aqui :facepunch: :
 
-    https://github.com/MisaelSantos/Matrixled/blob/master/C%C3%B3digo%20em%20arduino
+    https://github.com/MisaelSantos/Matrixled/blob/master/codigoarduino.ino
   
 * Assista o video do canal, **Manual do Mundo**, no **Youtube**. Vai ensinar tudo que precisar saber e como enviar o código, para o **Arduino Uno** :stuck_out_tongue: : 
   
