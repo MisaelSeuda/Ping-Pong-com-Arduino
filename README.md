@@ -4,7 +4,9 @@
   <img src = "https://misaelsantos.github.io/assets/img/pingpong.gif">
 </p>
 
-:star2:_Ping pong de **Matrix LED**, feito com **Arduino**._:star2:
+<p align = "center">
+  :star2:<i>Ping pong de <strong>Matrix LED</strong>, feito com <strong>Arduino</strong>.</i>:star2:
+</p>
 
 * <h2> Itens: </h2>
 
