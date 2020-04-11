@@ -29,6 +29,8 @@
  
  <h2 align = "center"> INSTALAR O PROGRAMA </h2>
  
+ <br>
+ 
  * Software desenvolvido com <strong>Arduino IDE</strong>, utiliza a linguagem <strong>C++</strong>(com pequenas modificações), faça o download do programa :smiley: :
 
     https://www.arduino.cc/en/main/software
