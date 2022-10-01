@@ -1,7 +1,7 @@
 <h1 align = "center"> PING PONG </h1>
 
 <p align = "center">
-  <img src = "https://github.com/MisaelSantos/MisaelSantos-Portfolio/blob/master/assets/img/pingpong.gif">
+  <img src = "https://github.com/MisaelSeuda/Ping-Pong-com-Arduino/blob/master/pingpong.gif">
 </p>
 
 <p align = "center">
